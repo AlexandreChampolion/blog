@@ -34,6 +34,8 @@ gem 'devise'
 gem 'rails_admin', '~> 1.0'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'autoprefixer-rails'
+gem 'bootstrap-sass'; '~>3.3.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

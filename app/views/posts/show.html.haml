@@ -1,0 +1,15 @@
+%ul
+  %li= @post.title
+  %li= @post.content
+  = form_for @comment, html: { multipart: true } do |c|
+    .form-group
+      = c.label :email, class: 'form-label required'
+      = c.text_field :email, class: 'form-control'
+    .form-group
+      = c.label :pseudo, class: 'form-label required'
+      = c.text_field :pseudo, class: 'form-control'
+    .form-group
+      = c.label :content, class: 'form-label required'
+      = c.text_area :content, class: 'form-control'
+    %br/
+    = f.submit

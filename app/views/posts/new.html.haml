@@ -1,0 +1,14 @@
+%h2 New Post
+%hr/
+= form_for @post, html: { multipart: true } do |f|
+  .form-group
+    = f.label :title, class: 'form-label required'
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :category_id, class: 'form-label required'
+    = f.collection_select :category_id, Category.all, :id, :name, {}, {class: 'form-control'}
+  .form-group
+    = f.label :content, class: 'form-label required'
+    = f.text_area :content, class: 'form-control'
+  %br/
+  = f.submit

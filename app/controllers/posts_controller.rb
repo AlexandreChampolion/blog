@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   def index
     @post = Post.filter(params)
   end
@@ -19,10 +18,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
   private
 
   def post_params
-      params.require(:post).permit(:category_id).merge(user_id: current_user.id)
-    end
+      params.require(:post).permit(
+      :title,
+      :content,
+      :category_id).merge(user_id: current_user.id)
   end
 end

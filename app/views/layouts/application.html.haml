@@ -2,9 +2,41 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Blog
+    %title Start Bootstrap Template
+    = stylesheet_link_tag       "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag    "application", "data-turbolinks-track" => true
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = yield
+    / Navigation
+    %nav.navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-targer" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to "Blog", root_url, class: "navbar-brand"
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            - if user_session != nil
+              %li
+                = link_to "New Post", new_post_path
+            - if current_user
+              %li
+                = link_to "Logout", destroy_user_session_path, method: :delete, confirm: "Are you sure?"
+            - else
+              %li
+                = link_to "Login", new_user_session_path
+            - Category.all.each do |category|
+              %li= link_to category.name, category_path(category.id)
+    / Page Content
+    .container
+      .row
+        .col-lg-12.text-center
+          - flash.each do |a, b|
+            .alert.alert-success
+              = b
+          = yield
+    :css
+      body{padding-top:70px;}
